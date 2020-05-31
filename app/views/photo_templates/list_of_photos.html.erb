@@ -1,0 +1,28 @@
+<h1>List of Photos</h1>
+
+<table border="1">
+  <tr>
+    <th>Image</th>
+    <th>Caption</th>
+    <th>Owner</th>
+    <th>Posted</th>
+    <th></th>
+  </tr>
+
+  <% @all_photos.each do |a_photo| %>
+    <tr>
+      <td>
+        <img src="<%= a_photo.image  %>">
+      </td>
+      <td><%= a_photo.caption  %></td>
+      <td>
+        <% a_photo.owner_id  %>
+        <% results = User.where({ :id => a_photo.owner_id }) %>
+        <% the_user = results.at(0) %>
+        <%= the_user.username %>
+      </td>
+      <td><%= a_photo.created_at  %></td>
+      <td>Show details</td>
+    </tr>
+  <% end %>
+</table>
